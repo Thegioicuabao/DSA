@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
+#include<string.h>
 #define MAX 100
 
 struct CuonSach
@@ -105,16 +106,37 @@ void binarySearch(Sach a[], int n, int x) {
   }
 		if(flag == 0) printf("Khong tim thay !!!" );
 }
+
+void findName(Sach a[], int n, char x[40])
+{
+	int flag = 0;
+	printf("Nhap ten sach can tim : ");
+	fflush(stdin);
+	gets(x);
+	for (int i = 0; i < n; i++)
+	{
+		int result = strcmp(x, a[i].tensach );
+		if( result == 0)
+		{
+			xuat1sach(a[i]);
+			flag = 1;
+			break;
+		}
+	}
+	if(flag == 0) printf("Khong tim thay !!!" );
+}
 int main() {
   Sach a[MAX];
   int n, x;
+	char y[40];
   nhapsophantu(n);
   nhapDS(a,n);
   xuatDS(a,n);
-	linearSearch(a,n,x);
-	InterchangeSort(a,n);
-  printf("\nDanh sach sau khi sap xep :\n");
-  xuatDS(a,n);
-	binarySearch(a,n,x);
+	// linearSearch(a,n,x);
+	// InterchangeSort(a,n);
+  // printf("\nDanh sach sau khi sap xep :\n");
+  // xuatDS(a,n);
+	// binarySearch(a,n,x);
+	findName(a,n,y);
   return 0;
 }
