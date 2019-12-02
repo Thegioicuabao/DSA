@@ -62,6 +62,49 @@ void linearSearch(Sach a[], int n, int x) {
 		}
 		if(flag == 0) printf("Khong tim thay !!!" );
 }
+
+void swap(Sach x, Sach y)
+{
+    Sach temp = x;
+    x = y;
+    y = temp;
+}
+
+void InterchangeSort(Sach a[], int n)
+{
+   for (int i = 0; i < n-1; i++)
+      for (int j = i+1; j < n; j++)
+					 if (a[i].masach > a[j].masach)
+	          {
+							  Sach temp = a[i];
+								a[i] =  a[j];
+								a[j] = temp;
+						}
+}
+
+void binarySearch(Sach a[], int n, int x) {
+
+	int flag = 0;
+	printf("Nhap ma sach can tim : ");
+	scanf("%d", &x);
+  int l = 0;
+	int r = n - 1;
+  while (l<=r)
+  {
+    int m = (l+r)/2;
+    if(x == a[m].masach)
+		{
+			flag = 1;
+			xuat1sach(a[m]);
+			break;
+		}
+ 	  else if (x < a[m].masach)
+			r = m - 1;
+    else if (x > a[m].masach)
+			l = m + 1;
+  }
+		if(flag == 0) printf("Khong tim thay !!!" );
+}
 int main() {
   Sach a[MAX];
   int n, x;
@@ -69,5 +112,9 @@ int main() {
   nhapDS(a,n);
   xuatDS(a,n);
 	linearSearch(a,n,x);
+	InterchangeSort(a,n);
+  printf("\nDanh sach sau khi sap xep :\n");
+  xuatDS(a,n);
+	binarySearch(a,n,x);
   return 0;
 }
