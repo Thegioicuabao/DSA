@@ -125,6 +125,28 @@ void findName(Sach a[], int n, char x[40])
 	}
 	if(flag == 0) printf("Khong tim thay !!!" );
 }
+
+Sach findMax(Sach a[], int n)
+	{
+		Sach max = a[0];
+		for (int i = 0; i < n; i++)
+			if(max.gia < a[i].gia)
+			{
+				max = a[i];
+			}
+		return max;
+	}
+
+void sachGiaCaoNhat(Sach a[], int n)
+{
+	printf("\nSach gia cao nhat la : \n");
+	Sach max;
+	max = findMax(a,n);
+	for (int i = 0; i < n; i++)
+		if(max.gia == a[i].gia)
+			xuat1sach(a[i]);
+
+}
 int main() {
   Sach a[MAX];
   int n, x;
@@ -137,6 +159,8 @@ int main() {
   // printf("\nDanh sach sau khi sap xep :\n");
   // xuatDS(a,n);
 	// binarySearch(a,n,x);
-	findName(a,n,y);
+	// findName(a,n,y);
+
+	sachGiaCaoNhat(a,n);
   return 0;
 }
