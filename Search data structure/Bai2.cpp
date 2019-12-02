@@ -50,12 +50,24 @@ void xuatDS(Sach a[], int n)
     xuat1sach(a[i]);
   }
 }
-
+void linearSearch(Sach a[], int n, int x) {
+	int flag = 0;
+	printf("Nhap ma sach can tim : ");
+	scanf("%d", &x);
+  for (int i = 0; i < n; i++)
+    if(x==a[i].masach)
+		{
+			xuat1sach(a[i]);
+			flag = 1;
+		}
+		if(flag == 0) printf("Khong tim thay !!!" );
+}
 int main() {
   Sach a[MAX];
-  int n;
+  int n, x;
   nhapsophantu(n);
   nhapDS(a,n);
   xuatDS(a,n);
+	linearSearch(a,n,x);
   return 0;
 }
