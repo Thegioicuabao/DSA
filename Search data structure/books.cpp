@@ -154,13 +154,12 @@ int main() {
   nhapsophantu(n);
   nhapDS(a,n);
   xuatDS(a,n);
-	// linearSearch(a,n,x);
-	// InterchangeSort(a,n);
-  // printf("\nDanh sach sau khi sap xep :\n");
-  // xuatDS(a,n);
-	// binarySearch(a,n,x);
-	// findName(a,n,y);
-
+	linearSearch(a,n,x);
+	InterchangeSort(a,n);
+  printf("\nDanh sach sau khi sap xep :\n");
+  xuatDS(a,n);
+	binarySearch(a,n,x);
+	findName(a,n,y);
 	sachGiaCaoNhat(a,n);
   return 0;
 }
