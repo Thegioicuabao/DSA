@@ -99,29 +99,28 @@ void swap(BI &x,BI &y)
 
 void BigIntSort(LIST l)
 {
-	NODE *min, *i, *j;
+	NODE *i, *j;
   int x,c;
   for(i=l.pHead; i!=l.pTail; i=i->pNext)
   {
-    for(int n=0; n<=strlen(i->info.bigint); n++)
-    {
-      x = (int)i->info.bigint[n] - 48;
-    }
     for(j=i->pNext; j!=NULL; j=j ->pNext)
     {
       if (strlen(i->info.bigint) > strlen(j->info.bigint))
-        x = 1, c = 0;
-      else if (strlen(i->info.bigint) < strlen(j->info.bigint))
-        x = 0, c = 1;
-      else
+        swap(i->info, j->info);
+      else if (strlen(i->info.bigint) == strlen(j->info.bigint))
       {
-        for(int m=0; m<=strlen(j->info.bigint); m++)
+        for(int n=0; n<=strlen(i->info.bigint); n++)
         {
-          c = (int)j->info.bigint[m] - 48;
+          x = (int)i->info.bigint[n] - '0';
+          for(int m=0; m<=strlen(j->info.bigint); m++)
+          {
+            c = (int)j->info.bigint[m] - '0';
+            if(x>c)
+              swap(i->info, j->info);
+              break;
+          }
         }
       }
-      if(x>c)
-        swap(i->info, j->info);
     }
   }
 }
