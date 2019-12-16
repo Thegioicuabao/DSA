@@ -97,30 +97,25 @@ void swap(BI &x,BI &y)
 	y=temp;
 }
 
-void ListSelectionSort(LIST l)
+void BigIntSort(LIST l)
 {
 	NODE *min, *i, *j;
   int x,c;
   for(i=l.pHead; i!=l.pTail; i=i->pNext)
   {
-    for(int n=0; n<strlen(i->info.bigint); n++)
+    for(int n=0; n<=strlen(i->info.bigint); n++)
     {
       x = (int)i->info.bigint[n] - 48;
     }
     for(j=i->pNext; j!=NULL; j=j ->pNext)
     {
       if (strlen(i->info.bigint) > strlen(j->info.bigint))
-      {
-        x = 1;
-        c = 0;
-      }
+        x = 1, c = 0;
       else if (strlen(i->info.bigint) < strlen(j->info.bigint))
+        x = 0, c = 1;
+      else
       {
-        x = 0;
-        c = 1;
-      }
-      else {
-        for(int m=0; m<strlen(j->info.bigint); m++)
+        for(int m=0; m<=strlen(j->info.bigint); m++)
         {
           c = (int)j->info.bigint[m] - 48;
         }
@@ -136,8 +131,8 @@ int main()
   InitList(l);
   InputList(l);
   Display(l);
-  ListSelectionSort(l);
+  BigIntSort(l);
   printf("\n");
-    Display(l);
+  Display(l);
   return 0;
 }
