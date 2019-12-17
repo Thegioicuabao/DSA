@@ -96,7 +96,31 @@ void swap(BI &x,BI &y)
 	x=y;
 	y=temp;
 }
-
+int Compare(NODE* i, NODE* j)
+{
+  if(strlen(i->info.bigint) != strlen(j->info.bigint))
+    return ((strlen(i->info.bigint) > strlen(j->info.bigint))? 1:0);
+  else if (strlen(i->info.bigint) == strlen(j->info.bigint))
+  {
+    int x = 0, c = 0, n = 0, m = 0;
+    while(n!=strlen(i->info.bigint) && m!=strlen(j->info.bigint))
+    {
+      x = (int)i->info.bigint[n] - '0';
+      c = (int)j->info.bigint[m] - '0';
+      if(x>c)
+      {
+        return 1;
+      }
+      else if(x<c)
+        return 0;
+      else
+        {
+          n++;
+          m++;
+        }
+      }
+    }
+}
 void BigIntSort(LIST l)
 {
 	NODE *i, *j;
@@ -105,25 +129,12 @@ void BigIntSort(LIST l)
   {
     for(j=i->pNext; j!=NULL; j=j ->pNext)
     {
-      if (strlen(i->info.bigint) > strlen(j->info.bigint))
-        swap(i->info, j->info);
-      else if (strlen(i->info.bigint) == strlen(j->info.bigint))
-      {
-        for(int n=0; n<=strlen(i->info.bigint); n++)
-        {
-          x = (int)i->info.bigint[n] - '0';
-          for(int m=0; m<=strlen(j->info.bigint); m++)
-          {
-            c = (int)j->info.bigint[m] - '0';
-            if(x>c)
-              swap(i->info, j->info);
-              break;
-          }
-        }
-      }
+      if(Compare(i,j)==1)
+        swap(i->info,j->info);
     }
   }
 }
+
 int main()
 {
   LIST l;
