@@ -161,6 +161,11 @@ void DeleteBefore(LIST &l, char x[40])
    return;
    for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
    {
+      if(strcmp(l.pHead->pNext->info.tench, x) == 0)
+      {
+        DeleteHead(l);
+        return;
+      }
        if(strcmp(i->pNext->pNext->info.tench, x) == 0)
        {
          NODE* q = i->pNext;
@@ -282,12 +287,13 @@ int main()
   InitList(l);
   InputList(l);
   Display(l);
-  DeleteAfter(l,x);
+//  DeleteAfter(l,x);
   // Display(l);
   // printf("\nCac cua hang co doanh thu nhieu nhat : \n");
   // Max(l);
   // BiggerThanX(l,k);
   //InterchangeSortLIST(l);
+  DeleteBefore(l, x);
   Display(l);
   return 0;
 }
