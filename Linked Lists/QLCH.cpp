@@ -1,5 +1,3 @@
-#include<stdio.h>
-#include<string.h>
 // •	mach int
 // •	tench char[40]
 // •	diachi char[50]
@@ -13,6 +11,9 @@
 // 6.	sắp xếp các cửa hàng theo thứ tự tăng dần theo doanh số/mã (sử dụng interchange sort hoặc insertion sort)
 // 7.	In thông tin các cửa hàng có doanh số lớn/ nhỏ nhất
 // 8.	In thông tin các cửa hàng có doanh số lớn/ nhỏ hơn doanh số trung bình của các cửa hàng
+#include<stdio.h>
+#include<string.h>
+
 typedef struct Cuahang
 {
   int mach;
@@ -50,14 +51,17 @@ void XuatCH(CH x)
 {
   printf("%-15d %-15s %-15s %-15f\n",x.mach, x.tench, x.dienthoai, x.doanhso);
 }
+
 void InitList(LIST &l)
 {
   l.pHead = l.pTail = NULL;
 }
+
 int IsEmty(LIST l)
 {
   return (l.pHead == NULL);
 }
+
 NODE* GetNode(CH x)
 {
   NODE* p = new NODE;
@@ -73,7 +77,6 @@ NODE* GetNode(CH x)
   }
 }
 
-
 void AddFirst(LIST &l, NODE* p)
 {
   if(l.pHead == NULL)
@@ -85,8 +88,8 @@ void AddFirst(LIST &l, NODE* p)
     p->pNext = l.pHead;
     l.pHead = p;
   }
-
 }
+
 void AddTail(LIST &l, NODE* p)
 {
   if(l.pHead == NULL)
@@ -129,6 +132,7 @@ void DeleteTail(LIST &l)
       }
   }
 }
+
 void DeleteAfter(LIST &l, char x[40])
 {
   printf("Nhap ten cua hang muon xoa(xoa sau)");
@@ -147,6 +151,7 @@ void DeleteAfter(LIST &l, char x[40])
        }
    }
 }
+
 void DeleteBefore(LIST &l, char x[40])
 {
   printf("Nhap ten cua hang muon xoa(xoa truoc)");
@@ -180,7 +185,35 @@ void InputList(LIST &l)
   }
 }
 
-NODE* MaxDS(LIST l)
+void BiggerThanX(LIST l, float x)
+{
+  printf("Nhap doanh so : " );
+  scanf("%f", &x);
+  for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
+  {
+      if(i->info.doanhso > x)
+      {
+        XuatCH(i->info);
+      }
+  }
+}
+
+void Swap(CH &x, CH &y)
+{
+  CH temp = x;
+  x = y;
+  y = temp;
+}
+
+void InterchangeSortLIST(LIST l)
+{
+  for(NODE* i=l.pHead; i!=l.pTail; i=i->pNext)
+    for(NODE* j= i->pNext; j!=NULL; j=j->pNext)
+      if(i->info.doanhso > j->info.doanhso)
+        Swap(i->info, j->info);
+}
+
+NODE* FindMax(LIST l)
 {
   NODE* max = l.pHead;
   for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
@@ -192,12 +225,37 @@ NODE* MaxDS(LIST l)
   }
   return max;
 }
-void Maxnhieuthang(LIST l)
+
+void Max(LIST l)
 {
-  NODE* max = MaxDS(l);
+  NODE* max = FindMax(l);
   for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
   {
       if(max->info.doanhso == i->info.doanhso)
+      {
+        XuatCH(i->info);
+      }
+  }
+}
+
+float AverageDS(LIST l)
+{
+  float x = 0;
+  float n = 0;
+  for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
+  {
+    x = x + i->info.doanhso;
+    n++;
+  }
+  return x/n;
+}
+
+void BiggerThanAverageDS(LIST l)
+{
+  float x = AverageDS(l);
+  for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
+  {
+      if(i->info.doanhso > x)
       {
         XuatCH(i->info);
       }
@@ -216,39 +274,20 @@ void Display(LIST l)
   }
 }
 
-float AverageDS(LIST l)
-{
-  float x = 0;
-  float n = 0;
-  for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
-  {
-    x = x + i->info.doanhso;
-    n++;
-  }
-  return x/n;
-}
-void BiggerThanAverageDS(LIST l)
-{
-  float x = AverageDS(l);
-  for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
-  {
-      if(i->info.doanhso > x)
-      {
-        XuatCH(i->info);
-      }
-  }
-}
 int main()
 {
   LIST l;
   char x[40];
+  float k;
   InitList(l);
   InputList(l);
   Display(l);
-//  DeleteAfter(l,x);
-//  Display(l);
+  // DeleteAfter(l,x);
+  // Display(l);
   // printf("\nCac cua hang co doanh thu nhieu nhat : \n");
-  // Maxnhieuthang(l);
-  BiggerThanAverageDS(l);
+  // Max(l);
+  // BiggerThanX(l,k);
+  InterchangeSortLIST(l);
+  Display(l);
   return 0;
 }
