@@ -156,7 +156,7 @@ int main()
   InputList(l);
   Display(l);
   Update(l, x);
-  Delete(l,x);
+  //Delete(l,x);
   Display(l);
   return 0;
 }
