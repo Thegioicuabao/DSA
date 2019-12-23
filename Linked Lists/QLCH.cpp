@@ -142,7 +142,7 @@ void DeleteAfter(LIST &l, char x[40])
    return;
    for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
    {
-       if(strcmp(i->pNext->info.tench, x) == 0)
+       if(strcmp(i->info.tench, x) == 0)
        {
          NODE* q = i->pNext;
          i->pNext =  i->pNext->pNext;
@@ -282,12 +282,12 @@ int main()
   InitList(l);
   InputList(l);
   Display(l);
-  // DeleteAfter(l,x);
+  DeleteAfter(l,x);
   // Display(l);
   // printf("\nCac cua hang co doanh thu nhieu nhat : \n");
   // Max(l);
   // BiggerThanX(l,k);
-  InterchangeSortLIST(l);
+  //InterchangeSortLIST(l);
   Display(l);
   return 0;
 }
