@@ -88,17 +88,7 @@ void InputList(LIST &l)
     AddFirst(l, p);
   }
 }
-void Display(LIST l)
-{
-  if(IsEmty(l))
-  {
-    return;
-  }
-  for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
-  {
-    Xuat1Sv(i->info);
-  }
-}
+
 void Update(LIST &l, char x[10])
 {
   SV k;
@@ -132,12 +122,12 @@ void Delete(LIST &l, char x[30])
   fflush(stdin);
   gets(x);
   NODE *g = new NODE;
+  if(strcmp(l.pHead->info.hoten,x) == 0)
+  {
+  DeleteHead(l);
+  }
   for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
   {
-    if(strcmp(l.pHead->info.hoten,x) == 0)
-    {
-    DeleteHead(l);
-    }
 
     if(strcmp(i->info.hoten,x) == 0)
     {
@@ -148,15 +138,68 @@ void Delete(LIST &l, char x[30])
     g=i;
   }
 }
+
+void Find(LIST l, int x)
+{
+  printf("Nhap tuoi sinh vien can tim");
+  scanf("%d", &x);
+  for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
+  {
+    if(i->info.tuoi == x)
+    {
+      Xuat1Sv(i->info);
+    }
+  }
+}
+void swap(SV &x, SV &y)
+{
+  SV temp = x;
+  x = y;
+  y = temp;
+}
+void InterchangeSort(LIST &l){
+  for(NODE* i = l.pHead; i!=l.pTail; i=i->pNext)
+    for(NODE* j = i->pNext; j!=NULL; j = j->pNext)
+      if(i->info.dtb > j->info.dtb)
+        swap(i->info, j->info);
+}
+void Display(LIST l)
+{
+  if(IsEmty(l))
+  {
+    return;
+  }
+  for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
+  {
+    Xuat1Sv(i->info);
+  }
+}
+
+void RemoveList(LIST &l)
+{
+  NODE* i;
+  while(l.pHead != NULL)
+  {
+    i=l.pHead;
+    l.pHead = i->pNext;
+    delete i;
+  }
+  l.pTail = NULL;
+}
+
 int main()
 {
   LIST l;
   char x[10];
+  int y;
   InitList(l);
   InputList(l);
   Display(l);
-  Update(l, x);
-  //Delete(l,x);
+  //InterchangeSort(l);
+  //Update(l, x);
+  //Find(l,y);
+  Delete(l,x);
+  //RemoveList(l);
   Display(l);
   return 0;
 }
