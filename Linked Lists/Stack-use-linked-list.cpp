@@ -97,6 +97,38 @@ int CheckTop(STACK s, int &x)
   return 1;
 }
 
+// int Push(STACK &s, int x)
+// {
+//   if(IsFull()==1)
+//   {
+//     return 0;
+//   }
+//   NODE* p = GetNode(x);
+//   if(s.Top==NULL)
+//   {
+//     s.Top = p;
+//     return;
+//   }
+//   p->pDown = s.Top;
+//   s.Top = p;
+//   s.numOfNumber++;
+//   return 1;
+// }
+//
+// int Pop(STACK &s, int &x)
+// {
+//   if(IsEmty(s))
+//   {
+//     return 0;
+//   }
+//   x=s.Top->data;
+//   NODE* p = s.Top;
+//   s.Top = s.Top->pDown;
+//   delete p;
+//   return 1;
+// }
+
+
 void Display(STACK s)
 {
   if(IsEmty(s) == 1)

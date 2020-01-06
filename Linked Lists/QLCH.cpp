@@ -278,7 +278,35 @@ void Display(LIST l)
     XuatCH(i->info);
   }
 }
+void InsertBefore(LIST &l, NODE* q, int x)
+{
+  if(l.pHead == NULL)
+  {
+    printf("DS dang rong khong the insert before");
+    return ;
+  }
 
+  if (l.pHead == l.pTail)
+  {
+    AddFirst(l, q);
+  }
+  else
+  {
+    for(NODE* i = l.pHead; i!=NULL; i=i->pNext)
+    {
+      if(x==l.pHead->info.mach)
+      {
+        AddFirst(l,q);
+      }
+      else if(i->pNext->info.mach==x)
+      {
+        q->pNext = i->pNext;
+  			i->pNext = q;
+        return;
+      }
+    }
+  }
+}
 int main()
 {
   LIST l;
@@ -287,13 +315,21 @@ int main()
   InitList(l);
   InputList(l);
   Display(l);
+  int z;
+  CH data_q;
+  printf("\nNhap gia tri can tim : ");
+  scanf("%d", &z);
+  NhapCH(data_q);
+  NODE* q = GetNode(data_q);
+  InsertBefore(l,q,z);
+Display(l);
 //  DeleteAfter(l,x);
   // Display(l);
   // printf("\nCac cua hang co doanh thu nhieu nhat : \n");
   // Max(l);
   // BiggerThanX(l,k);
   //InterchangeSortLIST(l);
-  DeleteBefore(l, x);
-  Display(l);
+  //DeleteBefore(l, x);
+//  Display(l);
   return 0;
 }
