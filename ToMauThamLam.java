@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 class Graph
 {
-    private int V;  
+    private int V;
     private LinkedList<Integer> adj[];
 
     Graph(int v)
@@ -56,7 +56,7 @@ class Graph
         }
 
         for (int u = 0; u < V; u++)
-            System.out.println("Vertex " + u + " --->  Color "
+            System.out.println("Đỉnh " + u + " --->  màu "
                     + result[u]);
     }
 
@@ -65,11 +65,6 @@ class Graph
         final long startTime = System.currentTimeMillis();
         Graph g1 = new Graph(5);
         g1.addEdge(0, 1);
-        g1.addEdge(0, 2);
-        g1.addEdge(0, 4);
-        g1.addEdge(2, 4);
-        g1.addEdge(3, 4);
-        System.out.println("Coloring of graph 1");
         g1.greedyColoring();
         final long endTime = System.currentTimeMillis();
 
