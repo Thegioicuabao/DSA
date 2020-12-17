@@ -40,6 +40,7 @@ public class Bai1 {
         return bac;
     }
     public static void main(String[] args) {
+        final long startTime = System.currentTimeMillis();
         int graph[][] = {
                 {0, 1, 1, 0, 1},
                 {1, 0, 0, 0, 0},
@@ -68,6 +69,10 @@ public class Bai1 {
             }
         }
         System.out.print("Số màu là:" + sm);
+        final long endTime = System.currentTimeMillis();
+
+        System.out.println("\nTotal execution time: " + (endTime - startTime) + "ms");
+
     }
 }
 
